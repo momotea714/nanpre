@@ -26,7 +26,7 @@
 
     $(".sudokuNumber").on("click", function (e) {
         var btnText = $(e.currentTarget).text();
-        echo.invoke("InputNumber", selectId, btnText,groupId);
+        echo.invoke("InputNumber", selectId, btnText);
     });
 
     connection.start(function () {
