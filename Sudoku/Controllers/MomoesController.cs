@@ -20,6 +20,12 @@ namespace Sudoku.Controllers
             return View(db.Momoes.ToList());
         }
 
+        // GET: Momoes
+        public JsonResult IndexAPI()
+        {
+            return new JsonResult() { Data = db.Momoes.ToList() };
+        }
+
         // GET: Momoes/Details/5
         public ActionResult Details(int? id)
         {
