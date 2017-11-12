@@ -12,7 +12,7 @@
     $(".target_table td").on("click", function (e) {
         // currentTarget のidを取得
         selectId = $(e.currentTarget).attr("id");
-        //hoge
+
         //数独のマス全てに背景色と文字色をデフォルトに設定しなおす
         $(".trout").each(function (index, element) {
             $(element).css("color", "black");
