@@ -26,7 +26,7 @@ namespace Sudoku.Controllers
         //public ActionResult Index()
         //{
         //    //http://funahashi.kids.coocan.jp/game/game651.html
-            
+
         //    ViewData = new ViewDataDictionary(questionDic);
         //    ViewBag.nanpreID = null;
         //    return View();
@@ -36,12 +36,22 @@ namespace Sudoku.Controllers
         {
             ViewData = new ViewDataDictionary(questionDic);
             ViewBag.nanpreid = id;
-            if (id != null)
-            {
-                new MyHub().Groups.Add(id.ToString(), id.ToString());
-                new MyHub().Join(id.ToString());
-            }
+            //if (id != null)
+            //{
+            //    new MyHub().Groups.Add(id.ToString(), id.ToString());
+            //    new MyHub().Join(id.ToString());
+            //}
             return View();
+        }
+
+        public JsonResult IndexAPI(int? id)
+        {
+            return new JsonResult()
+            {
+                Data = new { questionDic = new ViewDataDictionary(questionDic),
+                             questionid = id
+                           }
+            };
         }
 
         public ActionResult About()
