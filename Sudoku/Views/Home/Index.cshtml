@@ -1,0 +1,83 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+<script src="~/Scripts/jquery.signalR-2.2.2.min.js"></script>
+<link href="~/Content/table.css" rel="stylesheet" />
+<link href="~/Content/common.css" rel="stylesheet" />
+<script src="~/Scripts/common.js"></script>
+
+<div class="jumbotron">
+    <h1>ナンプレ</h1>
+</div>
+
+@{
+    var rand = ViewBag.nanpreid == null ?  new Random(DateTime.Now.Millisecond).Next(9) : ViewBag.nanpreid;
+    var question = ViewData.Model[rand];
+
+}
+<div>
+    <button id="nextQuestion" class="btn btn-info btn-lg">別の問題</button>
+</div>
+
+@Html.Hidden("RoomID",rand)
+
+<div class="width600px marginAuto">
+    <table class="table target_table" id="sudoku">
+        @for (var colgroupCount = 0; colgroupCount < 3; ++colgroupCount)
+        {
+            <colgroup>
+                @for (var colCount = 0; colCount < 3; ++colCount)
+                {
+                    <col />
+                }
+            </colgroup>
+        }
+        
+        @{var count = 0;}
+        @for (var i = 0; i < 3; ++i)
+        {
+            <tbody class="table-hover">
+                @for (var j = 0; j < 3; ++j)
+                {
+                    <tr>
+                        @for (var k = 0; k < 9; ++k)
+                        {
+                            var id = string.Format("trout{0}", (i * 3 + j + 1) * 10 + k + 1);
+                            var fixNumber = question[@count++];
+                            if (fixNumber == '0')
+                            {
+                                <td id=@id class="trout">　</td>
+                            }
+                            else
+                            {
+                                 <td class="trout">@fixNumber</td> 
+                             }
+                        }
+                    </tr>
+                }
+            </tbody>
+        }
+    </table>
+
+    <table class="table">
+
+        <colgroup>
+            @for (var colCount = 0; colCount < 9; ++colCount)
+            {
+                <col />
+            }
+        </colgroup>
+
+        <tbody>
+            <tr>
+                @for (var num = 1; num < 10; ++num)
+                {
+                    <td>
+                        <button type="button" class="btn btn-primary btn-lg sudokuNumber">@num</button>
+                    </td>
+                }
+            </tr>
+        </tbody>
+    </table>
+</div>

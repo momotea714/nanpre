@@ -1,0 +1,35 @@
+﻿table {
+    border-collapse: collapse;
+    border: solid thick;
+}
+
+tbody {
+    border: solid medium;
+}
+
+tr {
+    border: solid thin;
+    height: 1.4em;
+    width: 1.4em;
+    text-align: center;
+    padding: 0;
+}
+
+td {
+    font-size: xx-large;
+    width: auto;
+    height: 60px;
+}
+
+#sudoku td:hover{
+    color:white;
+    background:skyblue;
+}
+
+colgroup {
+    border: solid medium;
+}
+
+col {
+    border: solid thin;
+}
