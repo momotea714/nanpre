@@ -19,24 +19,24 @@ namespace Sudoku.Hubs
         /// </summary>
         /// <param name="id"></param>
         /// <param name="number"></param>
-        public void InputNumber(string id, string number,int groupId)
+        public void InputNumber(string id, string number)
         {
-            //Clients.All.InputNumber(id, number);
-            Clients.Group(groupId.ToString(), null).InputNumber(id, number);
+            Clients.All.InputNumber(id, number);
         }
         /// <summary>
-        /// 次の問題ボタン押下時に発火
+        /// 数字を入力した際に発火
         /// </summary>
-        public void NextQuestion()
+        /// <param name="id"></param>
+        /// <param name="number"></param>
+        public void InputNumber(string id, string number,string groupName)
         {
-            Clients.All.NextQuestion();
+            //Clients.All.InputNumber(id, number);
+            Clients.Group(groupName).InputNumber(id, number);
         }
-
-
         // 指定されたグループへ参加する
         public void Join(string groupName)
         {
-            //base.Groups.Add(null, groupName);
+            Groups.Add(Context.ConnectionId, groupName);
         }
 
 

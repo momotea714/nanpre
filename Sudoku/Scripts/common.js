@@ -10,7 +10,7 @@
 
     //数独のマス選択時のイベントハンドラ
     $(".target_table td").on("click", function (e) {
-        // currentTarget のidを取得
+        //選択しているマスのidを取得
         selectId = $(e.currentTarget).attr("id");
 
         //数独のマス全てに背景色と文字色をデフォルトに設定しなおす
@@ -26,10 +26,10 @@
 
     $(".sudokuNumber").on("click", function (e) {
         var btnText = $(e.currentTarget).text();
-        echo.invoke("InputNumber", selectId, btnText,groupId);
+        echo.invoke("InputNumber", selectId, btnText, "nngo" + $("#RoomID").val());
     });
 
     connection.start(function () {
-        echo.invoke("Join", $('#RommID').val());
+        echo.invoke("Join", "nngo" + $("#RoomID").val());
     });
 });
