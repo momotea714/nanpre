@@ -35,7 +35,7 @@ namespace Sudoku.Controllers
         public ActionResult Index(int? id)
         {
             ViewData = new ViewDataDictionary(questionDic);
-            ViewBag.nanpreid = id;
+            ViewBag.nanpreid = id;　　
             //if (id != null)
             //{
             //    new MyHub().Groups.Add(id.ToString(), id.ToString());
