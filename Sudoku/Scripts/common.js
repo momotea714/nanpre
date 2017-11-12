@@ -15,9 +15,9 @@
     echo.on("InputNumber", function (id, number) {
         $("#" + id).text(number);
     });
-    echo.on("NextQuestion", function () {
-        location.reload();
-    });
+    //echo.on("NextQuestion", function () {
+    //    location.reload();
+    //});
 
 
     $(".target_table td").on("click", function (e) {
@@ -31,11 +31,11 @@
         echo.invoke("InputNumber", selectId, btnText,groupId);
     }); 
 
-    $("#nextQuestion").on("click", function (e) {
-        echo.invoke("NextQuestion");
-    });
+    //$("#nextQuestion").on("click", function (e) {
+    //    echo.invoke("NextQuestion");
+    //});
 
     connection.start(function () {
-        echo.invoke("Join", "Room1");
+        echo.invoke("Join", $('#RommID').val());
     });
 });

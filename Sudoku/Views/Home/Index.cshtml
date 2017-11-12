@@ -16,11 +16,12 @@
     var question = ViewData.Model[rand];
 
 }
-<div>
+@*<div>
     <button id="nextQuestion" class="btn btn-info btn-lg">別の問題</button>
-</div>
+</div>*@
 
-@Html.Hidden("RoomID",rand)
+<input id="RommID" name="Title" type="hidden" value="@rand" />
+
 
 <div class="width600px marginAuto">
     <table class="table target_table" id="sudoku">

@@ -36,9 +36,9 @@ namespace Sudoku.Hubs
         // 指定されたグループへ参加する
         public void Join(string groupName)
         {
-            base.Groups.Add(null, groupName);
+            //base.Groups.Add(null, groupName);
         }
-            
+
 
         // 指定されたグループから離脱する
         public void Leave(string groupName)
