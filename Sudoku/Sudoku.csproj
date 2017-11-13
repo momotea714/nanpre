@@ -200,6 +200,8 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <None Include="Properties\PublishProfiles\CustomProfile.pubxml" />
+    <None Include="Properties\PublishProfiles\hoge - FTP.pubxml" />
+    <None Include="Properties\PublishProfiles\hoge - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\nanpre - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\nanpre - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />

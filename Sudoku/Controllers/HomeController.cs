@@ -35,22 +35,19 @@ namespace Sudoku.Controllers
         public ActionResult Index(int? id)
         {
             ViewData = new ViewDataDictionary(questionDic);
-            ViewBag.nanpreid = id;　　
-            //if (id != null)
-            //{
-            //    new MyHub().Groups.Add(id.ToString(), id.ToString());
-            //    new MyHub().Join(id.ToString());
-            //}
+            ViewBag.nanpreid = id;
             return View();
         }
 
         public JsonResult IndexAPI(int? id)
         {
-            return new JsonResult()
+            return new JsonResult
             {
-                Data = new { questionDic = new ViewDataDictionary(questionDic),
-                             questionid = id
-                           }
+                Data = new
+                {
+                    questionDic = new ViewDataDictionary(questionDic),
+                    questionid = id,
+                }
             };
         }
 
