@@ -21,7 +21,7 @@
         currentSelectTroutId = $(e.currentTarget).attr("id");
 
         //前回選択していたマスの背景色と文字色をデフォルトに設定しなおす
-        $("#" + preSelectTroutId).addclcss({
+        $("#" + preSelectTroutId).css({
             color: "black",
             'background-color': "",
         });
