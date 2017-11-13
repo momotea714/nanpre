@@ -18,7 +18,7 @@
 }
 
 @*<input id="RoomID" name="Title" type="hidden" value="@rand" />*@
-<input id="RoomID" name="Title" value="@rand" />
+<input id="RoomID" name="Title" value="@rand" hidden/>
 
 <div class="width600px marginAuto">
     <table class="table target_table" id="sudoku">
@@ -45,11 +45,11 @@
                             var fixNumber = question[@count++];
                             if (fixNumber == '0')
                             {
-                                <td id=@id class="trout">　</td>
+                                <td id=@id class="trout default">　</td>
                             }
                             else
                             {
-                                 <td class="trout">@fixNumber</td> 
+                                 <td id=@id class="trout default">@fixNumber</td> 
                              }
                         }
                     </tr>

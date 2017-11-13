@@ -15,22 +15,16 @@
     });
 
     //数独のマス選択時のイベントハンドラ
-    $(".target_table td").on("click", function (e) {
+    $(".trout").on("click", function (e) {
         //選択しているマスのidを取得
         preSelectTroutId = currentSelectTroutId;
         currentSelectTroutId = $(e.currentTarget).attr("id");
 
         //前回選択していたマスの背景色と文字色をデフォルトに設定しなおす
-        $("#" + preSelectTroutId).css({
-            color: "black",
-            'background-color': "",
-        });
+        $("#" + preSelectTroutId).removeClass('cellClicked');
 
         //選択しているマスの背景色と文字色を選択色に変更する
-        $("#" + currentSelectTroutId).css({
-            color: "white",
-            'background-color': "#2d89ef",
-        });
+        $("#" + currentSelectTroutId).addClass('cellClicked');
     });
 
     $(".sudokuNumber").on("click", function (e) {
@@ -43,4 +37,5 @@
         //サーバのメソッドを呼び出し
         echo.invoke("Join", "nngo" + $("#RoomID").val());
     });
+
 });
