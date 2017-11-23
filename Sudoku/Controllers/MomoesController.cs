@@ -23,7 +23,11 @@ namespace Sudoku.Controllers
         // GET: Momoes
         public JsonResult IndexAPI()
         {
-            return new JsonResult() { Data = db.Momoes.ToList() };
+            //response
+            object obj = new { status = "OK", data = db.Momoes.ToList()};
+
+            //return
+            return Json(obj, JsonRequestBehavior.AllowGet);
         }
 
         // GET: Momoes/Details/5
