@@ -41,19 +41,8 @@ namespace Sudoku.Controllers
 
         public JsonResult IndexAPI(int id)
         {
-            //response
-            object obj = new
-            {
-                status = "OK",
-                data = new
-                {
-                    question = questionDic[id],
-                    questionid = id,
-                }
-            };
-
             //return
-            return Json(obj, JsonRequestBehavior.AllowGet);
+            return Json(questionDic[id], JsonRequestBehavior.AllowGet);
         }
 
         public ActionResult About()
