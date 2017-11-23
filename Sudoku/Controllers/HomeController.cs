@@ -39,16 +39,21 @@ namespace Sudoku.Controllers
             return View();
         }
 
-        public JsonResult IndexAPI(int? id)
+        public JsonResult IndexAPI(int id)
         {
-            return new JsonResult
+            //response
+            object obj = new
             {
-                Data = new
+                status = "OK",
+                data = new
                 {
-                    questionDic = new ViewDataDictionary(questionDic),
+                    question = questionDic[id],
                     questionid = id,
                 }
             };
+
+            //return
+            return Json(obj, JsonRequestBehavior.AllowGet);
         }
 
         public ActionResult About()
