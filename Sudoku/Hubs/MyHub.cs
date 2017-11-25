@@ -21,6 +21,7 @@ namespace Sudoku.Hubs
         /// <param name="number"></param>
         public void InputNumber(string id, string number)
         {
+            Biz.Utility.WriteLog("InputNumber id:" + id + "number:" + number);
             Clients.All.InputNumber(id, number);
         }
         /// <summary>
@@ -30,12 +31,14 @@ namespace Sudoku.Hubs
         /// <param name="number"></param>
         public void InputNumber(string id, string number,string groupName)
         {
+            Biz.Utility.WriteLog("InputNumber id:" + id + "number:" + number + "groupName:"+ groupName);
             //Clients.All.InputNumber(id, number);
             Clients.Group(groupName).InputNumber(id, number);
         }
         // 指定されたグループへ参加する
         public void Join(string groupName)
         {
+            Biz.Utility.WriteLog("Join groupName:" + groupName);
             Groups.Add(Context.ConnectionId, groupName);
         }
 

@@ -44,12 +44,7 @@ namespace Sudoku.Controllers
             //response
             object obj = new
             {
-                status = "OK",
-                data = new
-                {
-                    question = questionDic[id],
-                    questionid = id,
-                }
+                question = questionDic[id],
             };
 
             //return
