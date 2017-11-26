@@ -23,8 +23,19 @@ namespace Sudoku.Controllers
         // GET: Momoes
         public JsonResult IndexAPI()
         {
+            var momos = db.Momoes.OrderByDescending(x => x.CreatedDateTime).ToList()
+                                 .Select(x => new { ID = x.ID,
+                                                    NanpreNO = x.NanpreNO,
+                                                    MakeUserID = x.MakeUserID,
+                                                    IsPublic = x.IsPublic,
+                                                    Title = x.Title,
+                                                    Remarks = x.Remarks,
+                                                    IsCleared = x.IsCleared,
+                                                    //CreatedDateTime = x.CreatedDateTime.ToString()
+                                 });
+
             //return
-            return Json(db.Momoes.OrderByDescending(x => x.CreatedDateTime).ToList(), JsonRequestBehavior.AllowGet);
+            return Json(momos, JsonRequestBehavior.AllowGet);
         }
 
         // GET: Momoes/Details/5

@@ -19,12 +19,12 @@ namespace Sudoku.Controllers
             return View();
         }
 
-        public JsonResult IndexAPI(int momo_id)
+        public JsonResult IndexAPI(int id)
         {
             //response
             object obj = new
             {
-                question = db.MomoStates.FirstOrDefault(x => x.Momo_ID == momo_id).CurrentNanpre,
+                question = db.MomoStates.FirstOrDefault(x => x.Momo_ID == id).CurrentNanpre,
             };
 
             //return
