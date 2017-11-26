@@ -180,7 +180,17 @@
     <Compile Include="Migrations\201711120318353_Initial.Designer.cs">
       <DependentUpon>201711120318353_Initial.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201711260654183_AddMomoState-NanpreQuestionTableAddColumnToMomoTable.cs" />
+    <Compile Include="Migrations\201711260654183_AddMomoState-NanpreQuestionTableAddColumnToMomoTable.Designer.cs">
+      <DependentUpon>201711260654183_AddMomoState-NanpreQuestionTableAddColumnToMomoTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201711260700593_AddColumnNanpreAnswerToNanpreQuestion.cs" />
+    <Compile Include="Migrations\201711260700593_AddColumnNanpreAnswerToNanpreQuestion.Designer.cs">
+      <DependentUpon>201711260700593_AddColumnNanpreAnswerToNanpreQuestion.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\MomoState.cs" />
+    <Compile Include="Models\NanpreQuestion.cs" />
     <Compile Include="Models\Momo.cs" />
     <Compile Include="Models\MomoDBContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -258,6 +268,12 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201711120318353_Initial.resx">
       <DependentUpon>201711120318353_Initial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711260654183_AddMomoState-NanpreQuestionTableAddColumnToMomoTable.resx">
+      <DependentUpon>201711260654183_AddMomoState-NanpreQuestionTableAddColumnToMomoTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711260700593_AddColumnNanpreAnswerToNanpreQuestion.resx">
+      <DependentUpon>201711260700593_AddColumnNanpreAnswerToNanpreQuestion.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

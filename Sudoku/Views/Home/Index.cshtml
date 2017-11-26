@@ -13,11 +13,10 @@
 
 @{
     var rand = ViewBag.nanpreid == null ?  new Random(DateTime.Now.Millisecond).Next(9) : ViewBag.nanpreid;
-    var question = ViewData.Model[rand];
+    var question = ViewBag.MomoStates.CurrentNanpre;
 }
 
-@*<input id="RoomID" name="Title" type="hidden" value="@rand" />*@
-<input id="RoomID" name="Title" value="@rand" hidden/>
+<input id="RoomID" name="Title" value="@ViewBag.MomoStates.Momo_ID" hidden/>
 
 <div class="width600px marginAuto">
     <table class="table target_table" id="sudoku">

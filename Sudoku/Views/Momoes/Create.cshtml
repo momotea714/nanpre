@@ -18,7 +18,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.NanpreNO, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.NanpreNO, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.NanpreNO, new { htmlAttributes = new { @class = "form-control",@min = 1, @max = ViewBag.MaxNanpreNO } })
                 @Html.ValidationMessageFor(model => model.NanpreNO, "", new { @class = "text-danger" })
             </div>
         </div>

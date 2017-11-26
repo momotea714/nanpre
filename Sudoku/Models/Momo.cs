@@ -13,5 +13,7 @@ namespace Sudoku.Models
         public bool IsPublic { get; set; }
         public string Title { get; set; }
         public string Remarks { get; set; }
+        public bool IsCleared { get; set; }
+        public DateTime CreatedDateTime { get; set; }
     }
 }

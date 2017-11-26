@@ -17,14 +17,14 @@ namespace Sudoku.Controllers
         // GET: Momoes
         public ActionResult Index()
         {
-            return View(db.Momoes.ToList());
+            return View(db.Momoes.OrderByDescending(x => x.CreatedDateTime).ToList());
         }
 
         // GET: Momoes
         public JsonResult IndexAPI()
         {
             //return
-            return Json(db.Momoes.ToList(), JsonRequestBehavior.AllowGet);
+            return Json(db.Momoes.OrderByDescending(x => x.CreatedDateTime).ToList(), JsonRequestBehavior.AllowGet);
         }
 
         // GET: Momoes/Details/5
@@ -45,6 +45,7 @@ namespace Sudoku.Controllers
         // GET: Momoes/Create
         public ActionResult Create()
         {
+            ViewBag.MaxNanpreNO = db.NanpreQuestions.Max(x => x.NanpreNO);
             return View();
         }
 
@@ -57,7 +58,19 @@ namespace Sudoku.Controllers
         {
             if (ModelState.IsValid)
             {
+                //SaveChangesを二回行うので本当は両方を範囲としたトランザクションが必要
+                momo.CreatedDateTime = DateTime.Now;
+                momo.IsCleared = false;
                 db.Momoes.Add(momo);
+                db.SaveChanges();
+
+                var momoState = new MomoState()
+                {
+                    Momo_ID = momo.ID,
+                    CurrentNanpre = db.NanpreQuestions.FirstOrDefault(x => x.ID == momo.NanpreNO).Nanpre
+                };
+                //CurrentNanpreがnullの場合の対応はいつかやる
+                db.MomoStates.Add(momoState);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -77,6 +90,8 @@ namespace Sudoku.Controllers
             {
                 return HttpNotFound();
             }
+            ViewBag.MaxNanpreNO = db.NanpreQuestions.Max(x => x.NanpreNO);
+
             return View(momo);
         }
 
@@ -89,7 +104,14 @@ namespace Sudoku.Controllers
         {
             if (ModelState.IsValid)
             {
+                momo.CreatedDateTime = DateTime.Now;
+
+                var momoState = db.MomoStates.FirstOrDefault(x => x.Momo_ID == momo.ID);
+                momoState.CurrentNanpre = db.NanpreQuestions.FirstOrDefault(x => x.NanpreNO == momo.NanpreNO).Nanpre;
+                momo.IsCleared = false;
+
                 db.Entry(momo).State = EntityState.Modified;
+                db.Entry(momoState).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -118,6 +140,11 @@ namespace Sudoku.Controllers
         {
             Momo momo = db.Momoes.Find(id);
             db.Momoes.Remove(momo);
+
+            //紐付くMomoStateも削除
+            var momoState = db.MomoStates.FirstOrDefault(x => x.Momo_ID == id);
+            db.MomoStates.Remove(momoState);
+
             db.SaveChanges();
             return RedirectToAction("Index");
         }

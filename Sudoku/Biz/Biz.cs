@@ -15,7 +15,7 @@ namespace Sudoku.Biz
                 true,
                 System.Text.Encoding.GetEncoding("shift_jis"));
             //TextBox1.Textの内容を書き込む
-            sw.Write(txt);
+            sw.WriteLine(txt);
             //閉じる
             sw.Close();
         }
