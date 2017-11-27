@@ -11,7 +11,7 @@
     var echo = connection.createHubProxy("myHub");
 
     //サーバから呼び出される関数を登録
-    echo.on("InputNumber", function (id, number) {
+    echo.on("inputNumber", function (id, number) {
         $(id).text(number);
     });
 

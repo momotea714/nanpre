@@ -33,7 +33,7 @@ namespace Sudoku.Hubs
         {
             //Biz.Utility.WriteLog("InputNumber id:" + id + "number:" + number + "groupName:" + groupName);
             //Clients.All.InputNumber(id, number);
-            Clients.Group(groupName).InputNumber(id, number);
+            Clients.Group(groupName).inputNumber(id, number);
         }
         // 指定されたグループへ参加する
         public void Join(string groupName)
