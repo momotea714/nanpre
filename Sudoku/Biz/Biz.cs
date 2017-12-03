@@ -30,4 +30,13 @@ namespace Sudoku.Biz
             return System.IO.Path.GetDirectoryName(path);
         }
     }
+
+    // Stringに拡張メソッドを定義
+    public static class String
+    {
+        public static string ChangeCharAt(this string str, int index, string newStr)
+        {
+            return str.Remove(index, 1).Insert(index, newStr);
+        }
+    }
 }

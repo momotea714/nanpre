@@ -11,9 +11,14 @@
     var echo = connection.createHubProxy("myHub");
 
     //サーバから呼び出される関数を登録
-    echo.on("inputNumber", function (id, number) {
+    echo.on("inputNumber", function (id, number, ConnectionId) {
         $(id).text(number);
     });
+
+    echo.on("joinNotify", function (connectionID) {
+        $('#lblJoin').text(connectionID + "さんが参加しました");
+    });
+
 
     //数独のマス選択時のイベントハンドラ
     $(".trout").on("click", function (e) {

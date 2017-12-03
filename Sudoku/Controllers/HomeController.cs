@@ -21,10 +21,12 @@ namespace Sudoku.Controllers
 
         public JsonResult IndexAPI(int id)
         {
+            var NanpreNO = db.Momoes.FirstOrDefault(x => x.ID == id).NanpreNO;
             //response
             object obj = new
             {
-                question = db.MomoStates.FirstOrDefault(x => x.Momo_ID == id).CurrentNanpre,
+                currentQuestion = db.MomoStates.FirstOrDefault(x => x.Momo_ID == id).CurrentNanpre,
+                originalQuestion = db.NanpreQuestions.FirstOrDefault(x => x.NanpreNO == NanpreNO).Nanpre,
             };
 
             //return

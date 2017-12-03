@@ -1,11 +1,16 @@
 ﻿using Microsoft.AspNet.SignalR;
 using Microsoft.AspNet.SignalR.Hubs;
+using Sudoku.Biz;
+using Sudoku.Models;
+using System.Linq;
 
 namespace Sudoku.Hubs
 {
     [HubName("myHub")]
     public class MyHub : Hub
     {
+        private MomoDBContext db = new MomoDBContext();
+
         /// <summary>
         /// td要素クリック時に発火
         /// </summary>
@@ -22,7 +27,7 @@ namespace Sudoku.Hubs
         public void InputNumber(string id, string number)
         {
             //Biz.Utility.WriteLog("InputNumber id:" + id + "number:" + number);
-            Clients.All.InputNumber(id, number);
+            Clients.All.inputNumber(id, number);
         }
         /// <summary>
         /// 数字を入力した際に発火
@@ -31,17 +36,26 @@ namespace Sudoku.Hubs
         /// <param name="number"></param>
         public void InputNumber(string id, string number,string groupName)
         {
-            //Biz.Utility.WriteLog("InputNumber id:" + id + "number:" + number + "groupName:" + groupName);
-            //Clients.All.InputNumber(id, number);
-            Clients.Group(groupName).inputNumber(id, number);
+            Clients.Group(groupName).inputNumber(id, number, Context.ConnectionId);
+
+            var momo_id = int.Parse(groupName.Replace("nngo",""));
+            id = id.Replace(@"#trout", "");
+            var index = int.Parse(id) - 10 - int.Parse(id.Substring(0, 1));
+            using (var momoDB = new MomoDBContext())
+            {
+                var hoge = momoDB.MomoStates.FirstOrDefault(x => x.Momo_ID == momo_id);
+                if (hoge == null) return;
+
+                hoge.CurrentNanpre = hoge.CurrentNanpre.ChangeCharAt(index, number);
+                momoDB.SaveChanges();
+            }
         }
         // 指定されたグループへ参加する
         public void Join(string groupName)
         {
-            //Biz.Utility.WriteLog("Join groupName:" + groupName);
             Groups.Add(Context.ConnectionId, groupName);
+            Clients.Group(groupName).joinNotify(Context.ConnectionId);
         }
-
 
         // 指定されたグループから離脱する
         public void Leave(string groupName)
