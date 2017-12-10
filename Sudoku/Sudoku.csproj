@@ -265,7 +265,7 @@
     <Content Include="Views\Talks\Details.cshtml" />
     <Content Include="Views\Talks\Edit.cshtml" />
     <Content Include="Views\Talks\Index.cshtml" />
-    <Content Include="Views\PartialView\_TalkPartialView.cshtml" />
+    <Content Include="Views\Talks\_TalkPartialView.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

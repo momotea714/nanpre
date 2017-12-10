@@ -20,6 +20,18 @@ namespace Sudoku.Controllers
             return View(db.Talks.ToList());
         }
 
+        public ActionResult SelectRoomTalk(int id)
+        {
+            return PartialView("_TalkPartialView", db.Talks.Where(x => x.Momo_ID == id).ToList());
+        }
+
+        public JsonResult SelectRoomTalkAPI(int id)
+        {
+            var questions = db.NanpreQuestions.OrderBy(x => x.NanpreNO).ToList();
+            //return
+            return Json(questions, JsonRequestBehavior.AllowGet);
+        }
+
         // GET: Talks/Details/5
         public ActionResult Details(int? id)
         {
