@@ -1,32 +1,30 @@
-﻿using Sudoku.Hubs;
-using Sudoku.Models;
-using System;
-using System.Collections.Generic;
+﻿using Sudoku.Models;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
 namespace Sudoku.Controllers
 {
     public class HomeController : Controller
     {
-        private MomoDBContext db = new MomoDBContext();
+        #region メンバ変数
+        private readonly MomoDBContext _db = new MomoDBContext();
+        #endregion
 
         public ActionResult Index(int? id)
         {
             //Momo(Room)に紐付くナンプレ番号を取得
-            ViewBag.MomoStates = db.MomoStates.FirstOrDefault(x => x.Momo_ID == id);
+            ViewBag.MomoStates = _db.MomoStates.FirstOrDefault(x => x.Momo_ID == 5);
             return View();
         }
 
         public JsonResult IndexAPI(int id)
         {
-            var NanpreNO = db.Momoes.FirstOrDefault(x => x.ID == id).NanpreNO;
+            var nanpreNO = _db.Momoes.FirstOrDefault(x => x.ID == id).NanpreNO;
             //response
-            object obj = new
+            var obj = new
             {
-                currentQuestion = db.MomoStates.FirstOrDefault(x => x.Momo_ID == id).CurrentNanpre,
-                originalQuestion = db.NanpreQuestions.FirstOrDefault(x => x.NanpreNO == NanpreNO).Nanpre,
+                currentQuestion = _db.MomoStates.FirstOrDefault(x => x.Momo_ID == id).CurrentNanpre,
+                originalQuestion = _db.NanpreQuestions.FirstOrDefault(x => x.NanpreNO == nanpreNO).Nanpre,
             };
 
             //return

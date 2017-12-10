@@ -6,3 +6,17 @@
     width: 600px;
 }
 
+.default {
+    color: black;
+    background: initial;
+}
+
+.cellClicked {
+    color: white;
+    background: #2d89ef;
+}
+
+.sameGroupCell {
+    color: white;
+    background: #00aba9;
+}

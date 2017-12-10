@@ -26,20 +26,56 @@
         preSelectTroutId = currentSelectTroutId;
         currentSelectTroutId = "#" + $(e.currentTarget).attr("id");
 
-        //前回選択していたマスの背景色と文字色をデフォルトに設定しなおす
-        $(preSelectTroutId).removeClass('cellClicked');
+        //選択しているマスのクラスの値を取得
+        var currentSelectTroutClasses = $(currentSelectTroutId).attr("class").split(" ");
+        var currentSelectTroutRowClassName = "";
+        var currentSelectTroutColumnClassName = "";
+        var currentSelectTroutGroupClassName = "";
 
-        //選択しているマスの背景色と文字色を選択色に変更する
-        $(currentSelectTroutId).addClass('cellClicked');
+        //クラスの数を取得
+        var length = currentSelectTroutClasses.length | 0;
 
-        //classの値を取得
-        var classVal = $(currentSelectTroutId).attr('class');
+        //現在選択しているセルのクラスの取得
+        for (var i = 0; i < length; i = i + 1 | 0) {
+            if (currentSelectTroutClasses[i].indexOf("rowClass") >= 0) {
+                //現在選択しているセルの行クラス名を取得
+                currentSelectTroutRowClassName = currentSelectTroutClasses[i];
+            } else if (currentSelectTroutClasses[i].indexOf("columnClass") >= 0) {
+                //現在選択しているセルの列クラス名を取得
+                currentSelectTroutColumnClassName = currentSelectTroutClasses[i];
+            } else if (currentSelectTroutClasses[i].indexOf("groupClass") >= 0) {
+                //現在選択しているセルのグループクラス名を取得
+                currentSelectTroutGroupClassName = currentSelectTroutClasses[i];
+            }
+        }
 
-        //取得したclassを分割
-        var classValues = classVal.split(' ');
+        //数独のマス全体に対して背景色を設定する
+        $(".trout").each(function () {
+            var classes = $(this).attr("class").split(" ");
+            var hasSameClass = classes.some(function(value) {
+                if (value === currentSelectTroutRowClassName ||
+                    value === currentSelectTroutColumnClassName ||
+                    value === currentSelectTroutGroupClassName) {
+                    return true;
+                }
+                return false;
+            });
+
+            //選択しているセルと同じクラスを持っていれば背景色を変更する
+            if (hasSameClass) {
+                $(this).addClass("sameGroupCell");
+            } else {
+                $(this).removeClass("sameGroupCell");
+            }
+        });
+
+        //選択しているセルの背景色を変更する
+        $(currentSelectTroutId).removeClass("sameGroupCell");
+        $(currentSelectTroutId).addClass("cellClicked");
+        $(preSelectTroutId).removeClass("cellClicked");
 
         //取得したclass内にfixがあれば数字を変更できないように変更する
-        if ($.inArray("fix", classValues) >= 0) {
+        if ($.inArray("fix", currentSelectTroutClasses) >= 0) {
             possibleInputTrout = false;
         } else {
             possibleInputTrout = true;
@@ -60,5 +96,4 @@
         //サーバのメソッドを呼び出し
         echo.invoke("Join", "nngo" + $("#RoomID").val());
     });
-
 });

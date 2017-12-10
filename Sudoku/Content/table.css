@@ -33,13 +33,3 @@ colgroup {
 col {
     border: solid thin;
 }
-
-.default {
-    color: black;
-    background: initial;
-}
-
-.cellClicked {
-    color: white;
-    background: #2d89ef;
-}

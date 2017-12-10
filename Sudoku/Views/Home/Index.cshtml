@@ -20,7 +20,7 @@
             {
                 <colgroup>
                     @for (var colCount = 0; colCount < 3; ++colCount)
-                {
+                    {
                         <col />
                     }
                 </colgroup>
@@ -31,19 +31,22 @@
             {
                 <tbody class="table-hover">
                     @for (var j = 0; j < 3; ++j)
-                {
+                    {
                         <tr>
                             @for (var k = 0; k < 9; ++k)
                             {
                                 var id = string.Format("trout{0}", (i * 3 + j + 1) * 10 + k + 1);
+                                var rowClass = string.Format("rowClass{0}", i * 3 + j);
+                                var columnClass = string.Format("columnClass{0}", k);
+                                var groupClass = string.Format("groupClass{0}", ((i * 3 + j) / 3 * 3) + k / 3);
                                 var fixNumber = question[@count++];
                                 if (fixNumber == '0')
                                 {
-                                    <td id=@id class="trout default">　</td>
+                                    <td id=@id class="trout default @rowClass @columnClass @groupClass">　</td>
                                 }
                                 else
                                 {
-                                    <td id=@id class="trout default fix">@fixNumber</td>
+                                    <td id=@id class="trout default fix @rowClass @columnClass @groupClass">@fixNumber</td>
                                 }
                             }
                         </tr>
