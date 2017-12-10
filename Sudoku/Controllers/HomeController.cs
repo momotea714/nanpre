@@ -13,7 +13,7 @@ namespace Sudoku.Controllers
         public ActionResult Index(int? id)
         {
             //Momo(Room)に紐付くナンプレ番号を取得
-            ViewBag.MomoStates = _db.MomoStates.FirstOrDefault(x => x.Momo_ID == 5);
+            ViewBag.MomoStates = _db.MomoStates.FirstOrDefault(x => x.Momo_ID == id);
             return View();
         }
 
