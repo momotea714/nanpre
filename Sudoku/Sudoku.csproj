@@ -260,11 +260,6 @@
     <Content Include="Views\Momoes\Details.cshtml" />
     <Content Include="Views\Momoes\Edit.cshtml" />
     <Content Include="Views\Momoes\Index.cshtml" />
-    <Content Include="Views\Talks\Create.cshtml" />
-    <Content Include="Views\Talks\Delete.cshtml" />
-    <Content Include="Views\Talks\Details.cshtml" />
-    <Content Include="Views\Talks\Edit.cshtml" />
-    <Content Include="Views\Talks\Index.cshtml" />
     <Content Include="Views\Talks\_TalkPartialView.cshtml" />
   </ItemGroup>
   <ItemGroup>
