@@ -14,28 +14,11 @@ namespace Sudoku.Controllers
     {
         private MomoDBContext db = new MomoDBContext();
 
+        #region ViewController
         // GET: Momoes
         public ActionResult Index()
         {
             return View(db.Momoes.OrderByDescending(x => x.CreatedDateTime).ToList());
-        }
-
-        // GET: Momoes
-        public JsonResult IndexAPI()
-        {
-            var momos = db.Momoes.OrderByDescending(x => x.CreatedDateTime).ToList()
-                                 .Select(x => new { ID = x.ID,
-                                                    NanpreNO = x.NanpreNO,
-                                                    MakeUserID = x.MakeUserID,
-                                                    IsPublic = x.IsPublic,
-                                                    Title = x.Title,
-                                                    Remarks = x.Remarks,
-                                                    IsCleared = x.IsCleared,
-                                                    //CreatedDateTime = x.CreatedDateTime.ToString()
-                                 });
-
-            //return
-            return Json(momos, JsonRequestBehavior.AllowGet);
         }
 
         // GET: Momoes/Details/5
@@ -168,5 +151,68 @@ namespace Sudoku.Controllers
             }
             base.Dispose(disposing);
         }
+        #endregion
+
+
+        #region API
+        // GET: Momoes
+        public JsonResult IndexAPI()
+        {
+            var momos = db.Momoes.OrderByDescending(x => x.CreatedDateTime).ToList()
+                                 .Select(x => new {
+                                     ID = x.ID,
+                                     NanpreNO = x.NanpreNO,
+                                     MakeUserID = x.MakeUserID,
+                                     IsPublic = x.IsPublic,
+                                     Title = x.Title,
+                                     Remarks = x.Remarks,
+                                     IsCleared = x.IsCleared,
+                                     //CreatedDateTime = x.CreatedDateTime.ToString()
+                                 });
+
+            //return
+            return Json(momos, JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult SelectAllQuestionAPI()
+        {
+            var questions = db.NanpreQuestions.OrderBy(x => x.NanpreNO).ToList();
+
+            //return
+            return Json(questions, JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult CreateMomoAPI([Bind(Include = "ID,NanpreNO,MakeUserID,IsPublic,Title,Remarks")] Momo momo)
+        {
+            if (ModelState.IsValid)
+            {
+                //SaveChangesを二回行うので本当は両方を範囲としたトランザクションが必要
+                momo.CreatedDateTime = DateTime.Now;
+                momo.IsCleared = false;
+                db.Momoes.Add(momo);
+                db.SaveChanges();
+
+                var momoState = new MomoState()
+                {
+                    Momo_ID = momo.ID,
+                    CurrentNanpre = db.NanpreQuestions.FirstOrDefault(x => x.ID == momo.NanpreNO).Nanpre
+                };
+                //CurrentNanpreがnullの場合の対応はいつかやる
+                db.MomoStates.Add(momoState);
+                db.SaveChanges();
+                return null;
+            }
+
+            return null;
+        }
+
+        public JsonResult DeleteMomoAPI(int id)
+        {
+            var questions = db.NanpreQuestions.OrderBy(x => x.NanpreNO).ToList();
+
+            //return
+            return Json(questions, JsonRequestBehavior.AllowGet);
+        }
+        #endregion
     }
 }

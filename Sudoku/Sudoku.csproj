@@ -178,6 +178,7 @@
     <Compile Include="Biz\Biz.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MomoesController.cs" />
+    <Compile Include="Controllers\TalksController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -194,11 +195,16 @@
     <Compile Include="Migrations\201711260700593_AddColumnNanpreAnswerToNanpreQuestion.Designer.cs">
       <DependentUpon>201711260700593_AddColumnNanpreAnswerToNanpreQuestion.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201712100912592_Talk_Update.cs" />
+    <Compile Include="Migrations\201712100912592_Talk_Update.Designer.cs">
+      <DependentUpon>201712100912592_Talk_Update.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\MomoState.cs" />
     <Compile Include="Models\NanpreQuestion.cs" />
     <Compile Include="Models\Momo.cs" />
     <Compile Include="Models\MomoDBContext.cs" />
+    <Compile Include="Models\Talk.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -254,6 +260,12 @@
     <Content Include="Views\Momoes\Details.cshtml" />
     <Content Include="Views\Momoes\Edit.cshtml" />
     <Content Include="Views\Momoes\Index.cshtml" />
+    <Content Include="Views\Talks\Create.cshtml" />
+    <Content Include="Views\Talks\Delete.cshtml" />
+    <Content Include="Views\Talks\Details.cshtml" />
+    <Content Include="Views\Talks\Edit.cshtml" />
+    <Content Include="Views\Talks\Index.cshtml" />
+    <Content Include="Views\PartialView\_TalkPartialView.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -280,6 +292,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201711260700593_AddColumnNanpreAnswerToNanpreQuestion.resx">
       <DependentUpon>201711260700593_AddColumnNanpreAnswerToNanpreQuestion.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712100912592_Talk_Update.resx">
+      <DependentUpon>201712100912592_Talk_Update.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

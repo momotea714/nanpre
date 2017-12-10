@@ -46,7 +46,7 @@ namespace Sudoku.Hubs
                 var hoge = momoDB.MomoStates.FirstOrDefault(x => x.Momo_ID == momo_id);
                 if (hoge == null) return;
 
-                hoge.CurrentNanpre = hoge.CurrentNanpre.ChangeCharAt(index, number);
+                hoge.CurrentNanpre = hoge.CurrentNanpre.ChangeCharAt　(index, number);
                 momoDB.SaveChanges();
             }
         }

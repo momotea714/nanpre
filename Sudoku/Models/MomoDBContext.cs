@@ -14,5 +14,6 @@ namespace Sudoku.Models
         public System.Data.Entity.DbSet<Sudoku.Models.Momo> Momoes { get; set; }
         public System.Data.Entity.DbSet<Sudoku.Models.NanpreQuestion> NanpreQuestions { get; set; }
         public System.Data.Entity.DbSet<Sudoku.Models.MomoState> MomoStates { get; set; }
+        public System.Data.Entity.DbSet<Sudoku.Models.Talk> Talks { get; set; }
     }
 }
