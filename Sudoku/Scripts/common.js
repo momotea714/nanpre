@@ -26,6 +26,9 @@
         preSelectTroutId = currentSelectTroutId;
         currentSelectTroutId = "#" + $(e.currentTarget).attr("id");
 
+        //前回選択したセルと今回選択しているセルが同じ場合は以降の処理を中断
+        if (preSelectTroutId === currentSelectTroutId) return;
+
         //選択しているマスのクラスの値を取得
         var currentSelectTroutClasses = $(currentSelectTroutId).attr("class").split(" ");
         var currentSelectTroutRowClassName = "";
@@ -70,9 +73,9 @@
         });
 
         //選択しているセルの背景色を変更する
+        $(preSelectTroutId).removeClass("cellClicked");
         $(currentSelectTroutId).removeClass("sameGroupCell");
         $(currentSelectTroutId).addClass("cellClicked");
-        $(preSelectTroutId).removeClass("cellClicked");
 
         //取得したclass内にfixがあれば数字を変更できないように変更する
         if ($.inArray("fix", currentSelectTroutClasses) >= 0) {

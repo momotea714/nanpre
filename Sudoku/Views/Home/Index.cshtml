@@ -9,6 +9,7 @@
 @{
     var rand = ViewBag.nanpreid == null ?  new Random(DateTime.Now.Millisecond).Next(9) : ViewBag.nanpreid;
     var question = ViewBag.MomoStates.CurrentNanpre;
+    var defaultQuestion = ViewBag.NanpreQuestion.Nanpre;
 }
 
 <input id="RoomID" name="Title" value="@ViewBag.MomoStates.Momo_ID" hidden/>
@@ -39,15 +40,23 @@
                                 var rowClass = string.Format("rowClass{0}", i * 3 + j);
                                 var columnClass = string.Format("columnClass{0}", k);
                                 var groupClass = string.Format("groupClass{0}", ((i * 3 + j) / 3 * 3) + k / 3);
-                                var fixNumber = question[@count++];
-                                if (fixNumber == '0')
+                                var displayNumber = question[@count];
+                                if (defaultQuestion[count] == '0')
                                 {
-                                    <td id=@id class="trout default @rowClass @columnClass @groupClass">　</td>
+                                    if (displayNumber == '0')
+                                    {
+                                        <td id=@id class="trout inputCell @rowClass @columnClass @groupClass"> </td>
+                                    }
+                                    else
+                                    {
+                                        <td id=@id class="trout inputCell @rowClass @columnClass @groupClass">@displayNumber</td>
+                                    }
                                 }
                                 else
                                 {
-                                    <td id=@id class="trout default fix @rowClass @columnClass @groupClass">@fixNumber</td>
+                                    <td id=@id class="trout default fix @rowClass @columnClass @groupClass">@defaultQuestion[count]</td>
                                 }
+                                ++count;
                             }
                         </tr>
                     }
@@ -59,7 +68,7 @@
 
             <colgroup>
                 @for (var colCount = 0; colCount < 9; ++colCount)
-            {
+                {
                     <col />
                 }
             </colgroup>
