@@ -12,9 +12,11 @@ namespace Sudoku.Controllers
 
         public ActionResult Index(int? id)
         {
+            var nanpreNO = _db.Momoes.FirstOrDefault(x => x.ID == id).NanpreNO;
+
             //Momo(Room)に紐付くナンプレ番号を取得
             ViewBag.MomoStates = _db.MomoStates.FirstOrDefault(x => x.Momo_ID == id);
-            ViewBag.NanpreQuestion = _db.NanpreQuestions.FirstOrDefault(x => x.NanpreNO == id);
+            ViewBag.NanpreQuestion = _db.NanpreQuestions.FirstOrDefault(x => x.NanpreNO == nanpreNO);
 
             return View();
         }
