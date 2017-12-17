@@ -17,7 +17,7 @@ namespace Sudoku.Controllers
             //Momo(Room)に紐付くナンプレ番号を取得
             ViewBag.MomoStates = _db.MomoStates.FirstOrDefault(x => x.Momo_ID == id);
             ViewBag.NanpreQuestion = _db.NanpreQuestions.FirstOrDefault(x => x.NanpreNO == nanpreNO);
-            ViewBag.Talks = _db.Talks.Where(x => x.Momo_ID == id).ToList();
+            ViewBag.Talks = _db.Talks.Where(x => x.Momo_ID == id).OrderBy(x => x.CreatedDateTime).ToList();
             return View();
         }
 
