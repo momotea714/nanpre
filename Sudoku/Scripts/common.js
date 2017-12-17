@@ -1,5 +1,7 @@
 ﻿$(function () {
 
+    $('#displayname').val(prompt('Enter your name:', ''));
+
     var preSelectTroutId = "0";
     var currentSelectTroutId = "0";
     var possibleInputTrout = true;
@@ -19,6 +21,19 @@
         $('#lblJoin').text(connectionID + "さんが参加しました");
     });
 
+    echo.on("Receive", function (talk,datetime) {
+        // Html encode display name and message. 
+        var encodedDateTime = $('<div />').text(datetime).html();
+        var encodedName = $('<div />').text(talk.DisplayName).html();
+        var encodedMsg = $('<div />').text(talk.Message).html();
+        // Add the message to the page. 
+        $('#ulTalk').append('<li><strong>' + encodedDateTime + ':&nbsp;&nbsp;' + encodedName
+            + '</strong>:&nbsp;&nbsp;' + encodedMsg + '</li>');
+    });
+
+    $("#btnSendMessage").on("click", function (e) {
+        echo.invoke("Send", $("#RoomID").val(), $('#displayname').val(), $('#txtMessage').val());
+    });
 
     //数独のマス選択時のイベントハンドラ
     $(".trout").on("click", function (e) {

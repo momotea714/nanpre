@@ -178,7 +178,6 @@
     <Compile Include="Biz\Biz.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MomoesController.cs" />
-    <Compile Include="Controllers\TalksController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -260,7 +259,6 @@
     <Content Include="Views\Momoes\Details.cshtml" />
     <Content Include="Views\Momoes\Edit.cshtml" />
     <Content Include="Views\Momoes\Index.cshtml" />
-    <Content Include="Views\Talks\_TalkPartialView.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

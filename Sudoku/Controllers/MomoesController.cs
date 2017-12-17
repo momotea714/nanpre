@@ -189,6 +189,11 @@ namespace Sudoku.Controllers
                 //SaveChangesを二回行うので本当は両方を範囲としたトランザクションが必要
                 momo.CreatedDateTime = DateTime.Now;
                 momo.IsCleared = false;
+                momo.NanpreNO =  Int16.Parse(Request.QueryString["NanpreNO"].ToString());
+                momo.Title = Request.QueryString["Title"].ToString();
+                momo.MakeUserID =  Request.QueryString["MakeUserID"].ToString();
+                momo.IsPublic =  Request.QueryString["IsPublic"].ToString() == "True" ? true : false;
+                momo.Remarks = string.Empty;
                 db.Momoes.Add(momo);
                 db.SaveChanges();
 

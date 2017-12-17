@@ -2,6 +2,7 @@
 using Microsoft.AspNet.SignalR.Hubs;
 using Sudoku.Biz;
 using Sudoku.Models;
+using System;
 using System.Linq;
 
 namespace Sudoku.Hubs
@@ -34,11 +35,11 @@ namespace Sudoku.Hubs
         /// </summary>
         /// <param name="id"></param>
         /// <param name="number"></param>
-        public void InputNumber(string id, string number,string groupName)
+        public void InputNumber(string id, string number, string groupName)
         {
             Clients.Group(groupName).inputNumber(id, number, Context.ConnectionId);
 
-            var momo_id = int.Parse(groupName.Replace("nngo",""));
+            var momo_id = int.Parse(groupName.Replace("nngo", ""));
             id = id.Replace(@"#trout", "");
             var index = int.Parse(id) - 10 - int.Parse(id.Substring(0, 1));
             using (var momoDB = new MomoDBContext())
@@ -46,7 +47,7 @@ namespace Sudoku.Hubs
                 var hoge = momoDB.MomoStates.FirstOrDefault(x => x.Momo_ID == momo_id);
                 if (hoge == null) return;
 
-                hoge.CurrentNanpre = hoge.CurrentNanpre.ChangeCharAt　(index, number);
+                hoge.CurrentNanpre = hoge.CurrentNanpre.ChangeCharAt(index, number);
                 momoDB.SaveChanges();
             }
         }
@@ -64,9 +65,21 @@ namespace Sudoku.Hubs
         }
 
         // 指定されたグループに参加しているクライアントへメッセージを送信する
-        public void Send(string groupName, string text)
+        public void Send(string momo_id,string displayName, string message)
         {
-            Clients.Group(groupName).Receive(text);
+            var talk = new Talk
+            {
+                Momo_ID = int.Parse(momo_id),
+                DisplayName = displayName,
+                Message = message,
+                CreatedDateTime = DateTime.Now,
+                SenderUser_ID = Context.ConnectionId
+            };
+
+            db.Talks.Add(talk);
+            db.SaveChanges();
+
+            Clients.Group("nngo" + momo_id).Receive(talk, talk.CreatedDateTime.ToShortDateString() + " " + talk.CreatedDateTime.ToShortTimeString());
         }
     }
 }
